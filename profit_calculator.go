@@ -10,15 +10,32 @@ func main(){
 
   var taxRate float64
 
-  fmt.Print("Total Revenue: ")
-  fmt.Scan(&revenue)
 
-  fmt.Print("Total Expenses: ")
-  fmt.Scan(&expenses)
+ revenue =  userInfo("Total Revenue: ")
+ expenses = userInfo("Total Expenses: ")
+ taxRate = userInfo("Tax rate: ")
 
-  fmt.Print("Tax rate: ")
-  fmt.Scan(&taxRate)
+  var earningsBeforeTax,profit,ratio = calculateRevenue(revenue,expenses,taxRate)
 
+  fmt.Println(`Earnings before tax = `,earningsBeforeTax)
+  fmt.Println(`Profit = `,profit)
+  fmt.Println(`Ratio = `,ratio)
+
+
+}
+
+func userInfo(infoText string) float64 {
+
+	var userInput float64
+
+	  fmt.Print(infoText)
+      fmt.Scan(&userInput)
+
+	  return userInput
+
+}
+
+func calculateRevenue(revenue float64, expenses float64, taxRate float64)(float64,float64,float64){
   var earningsBeforeTax = revenue - expenses
 
   var tax = (1 - taxRate/100) * earningsBeforeTax
@@ -27,9 +44,5 @@ func main(){
 
   var ratio = earningsBeforeTax/profit
 
-  fmt.Println(`Earnings before tax = `,earningsBeforeTax)
-  fmt.Println(`Profit = `,profit)
-  fmt.Println(`Ratio = `,ratio)
-
-
+  return earningsBeforeTax,profit,ratio
 }
